@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>My shopping web app</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <!-- More CSS-->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+  <body>
+      
+    <div class="container-fluid">
+        
+        <!-- HEADER GOES HERE -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top"> <!--EXPAND IN DESKTOP MODE-->
+            
+             <!--EXPANDS MENU WHILE SMALL-->
+            <button type="button" class="navbar-toggler" data-target="#menu" data-toggle="collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- MENU -->
+            <div class="collapse navbar-collapse" id="menu">
+
+                <a class="navbar-brand text-white mr-auto" target="_blank" rel="noopener noreferrer" href="https://asenjopablo.github.io/">
+                    Pablo Asenjo
+                </a>
+
+                <ul class="navbar-nav"> <!--expands content for both sides (span to the right)-->
+                    <li class="navbar-item active">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="#" class="nav-link">About</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <button id="checkout-btn" class="btn btn-primary">Checkout</button>
+
+        </nav> 
+
+
+        <!-- COOL SHOPPING CART ON THE WAY-->
+
+        <div id="cart" style="display:none">
+            <table class="table table-striped table-bordered" id="shopping-table" summary="shopping list">
+                <thead class="text-center">
+                  <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col" id="total-cost">Total cost: 0€</th>
+                  </tr>
+                </thead>
+                <tbody class="table-body text-center">
+                  <!--PRODUCTS ARE ADDED HERE ON CLICK-->
+                </tbody>
+              </table>
+        </div>
+
+        <!-- PRODUCTS -->
+        <div class="products row text-center container-fluid mx-auto">
+
+            <div class="card col-lg-4">
+                <img class="card-img-top product-pic mx-auto d-block" src="https://www.ikea.com/es/es/images/products/fanbyn-chair__0587379_PE672586_S5.JPG?f=xs" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2>Chair</h5>
+                        <p>A beautiful white chair</p>
+                        <p id="chair-price"></p>
+                        <button class="btn btn-primary" id="buy-chair-btn">ADD <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card col-lg-4">
+                <img class="card-img-top product-pic mx-auto d-block" src="https://www.ikea.com/es/es/images/products/lerhamn-table-light-antique-stain-white-stain__0238243_PE377691_S5.JPG?f=s" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2>Table</h5>
+                        <p>A beautiful white table</p>
+                        <p id="table-price"></p>
+                        <button class="btn btn-primary" id="buy-table-btn">ADD <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="card col-lg-4">
+                <img class="card-img-top product-pic mx-auto d-block" src="https://www.ikea.com/es/es/images/products/malm-ottoman-bed__0749127_PE745496_S5.JPG?f=s" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2>Bed</h5>
+                        <p>A beautiful white bed</p>
+                        <p id="bed-price"></p>
+                        <button class="btn btn-primary" id="buy-bed-btn">ADD <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card col-lg-4">
+                <img class="card-img-top product-pic mx-auto d-block" src="https://www.ikea.com/es/es/images/products/jonaxel-shelving-unit__0678040_PE719159_S5.JPG?f=s" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2>Bookcase</h5>
+                        <p>A beautiful white bookcase</p>
+                        <p id="bookcase-price"></p>
+                        <button class="btn btn-primary" id="buy-bookcase-btn">ADD <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card col-lg-4">
+                <img class="card-img-top product-pic product-pic mx-auto d-block" src="https://www.ikea.com/es/es/images/products/fejka-artificial-potted-plant-with-pot-in-outdoor-succulent__0614211_PE686835_S5.JPG?f=s" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2>Plant</h5>
+                        <p>A beautiful white plant</p>
+                        <p id="plant-price"></p>
+                        <button class="btn btn-primary" id="buy-plant-btn">ADD <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card col-lg-4">
+                <img class="card-img-top product-pic mx-auto d-block" src="https://www.ikea.com/es/en/images/products/hemnes-tv-bench-white-stain-light-brown__0583377_PE671187_S5.JPG?f=s" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        <h2>TV bench</h5>
+                        <p>A beautiful white TV bench</p>
+                        <p id="tv-bench-price"></p>
+                        <button class="btn btn-primary" id="buy-tv-bench-btn">ADD <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="script.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
