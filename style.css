@@ -1,3 +1,11 @@
+/* all */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+
+    background-color: rgb(248, 248, 248);
+}
+
 /* navbar changes */
 .navbar {
     border-radius: 5px;
@@ -14,13 +22,48 @@
 
 /* align all products and beautify */
 .products {
-    height: 100vh;
     width: 90%;
     margin: 5%;
+
+    font-size: 1.2rem;
 }
 
 .card {
     padding: 1%;
+    margin: 1% auto;
+}
+
+.card-body {
+    border: solid 2px rgba(0, 0, 0, 0.144);
+    border-radius: 5px;
+    width: 95%;
+    margin: 5% auto;
+}
+
+.desc {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.price {
+    border-radius: 5px;
+    width: 20%;
+    margin: 5% auto;
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.062);
+}
+
+/* confirmation popup */
+.confirmation {
+    position: absolute;
+    top: 20%;
+
+    background-color: #f0ad4e;
+    border: dotted 2px #ffd292;
+    color: white;
+
+    padding: 2%;
+    border-radius: 5px;
 }
 
 /* buttons */

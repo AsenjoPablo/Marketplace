@@ -1,13 +1,11 @@
 $(document).ready(function() {
 
     // checkout
+    var cart = $("#cart")
     var checkoutBtn = $("#checkout-btn");
     checkoutBtn.click (function () {
         cart.toggle(200);
     })
-
-    // cart
-    var cart = $("#cart")
 
     // BUY ITEMS LIST
     var chair = new Item (1, "Chair", 15);
@@ -45,8 +43,7 @@ $(document).ready(function() {
     buyTVBenchBtn.click (function () {
         addTest(tvBench);  
     })
-
-    //**********************************EXPERIMENTATION PLAYGROUND**************************************
+    
     // global builder
     function Item (id, name, price) {
         this.id = id;
@@ -57,33 +54,53 @@ $(document).ready(function() {
         this.exists = false;
     }
 
-    // TEST PRODUCT DECLARATION
+    // TEST PRODUCT DECLARATION ************** NOT IN USE WHEN NOT TESTING
     var test = new Item ("TEST", "test", 10);
     $("#test-add").click(function () {
         addTest(test);  
+
     })
 
-    // TODO POSSIBILITY TO CHOOSE QUANTITY BEFORE ADDING TO CART
-    function addTest (testObj) {
+    // TESTING SLEEP
+    function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+          if ((new Date().getTime() - start) > milliseconds){
+            break;
+          }
+        }
+      }
+
+    // ADDED TO CART CONFIRMATION
+    $(".buy-btn").click(function () {
+        console.log("click")
+        $(this).parent().append("<div class='confirmation'>Sucessfully added to cart!</div>");
+        $(".confirmation").delay(1000).fadeOut(1000);
+    })
+
+    // TODO POSSIBILITY TO CHOOSE QUANTITY BEFORE ADDING TO CART 
+    function addTest (obj) {
         
         // if item doesn't exist, it's added as a new row
-        if (!testObj.exists) {
-            $("tbody").append('<tr><th scope="row" id="' + testObj.id + '">' + testObj.id + '</th> <td>' + testObj.name +'</td class="price"><td>'+testObj.price+'</td><td class="qty">' + testObj.qty + '</td><td>' + removeButton + '</td></tr>');  
+        if (!obj.exists) {
+            $("tbody").append('<tr><th scope="row" id="' + obj.id + '">' + obj.id + '</th> <td class="name">' + obj.name +'</td class="price"><td>'+obj.price+'</td><td class="qty">' + obj.qty + '</td><td class="remove' + obj.name + '">' + removeButton + '</td></tr>');  
+            console.log("Added product to cart")
             //its existance is changed so the program knows there's already one and stops adding new rows
-            testObj.exists = true;
+            obj.exists = true;
         // if the item already exists, we must update its parameters inside the html
         } else {
 
             // adds 1 of the item
-            testObj.qty++;
-            console.log("item: " + testObj.name + ", quantity: " + testObj.qty + ", total price of these items: " + testObj.price*testObj.qty)
+            obj.qty++;
+            console.log("item: " + obj.name + ", quantity: " + obj.qty + ", total price of these items: " + obj.price*obj.qty)
 
             //updates shopping cart with new qty
-            $("#" + testObj.id).siblings(".qty").html(testObj.qty);            
+            $("#" + obj.id).siblings(".qty").html(obj.qty);  
+
         }
 
         // cost of individual product is added to total
-        totalCost += testObj.price;
+        totalCost += obj.price;
         updateTotalCost();
     }
 
@@ -93,20 +110,50 @@ $(document).ready(function() {
         $("#total-cost").html("Total cost: " + totalCost + "€");
     }
 
+    // remove function
+    function cleanObj (obj) {
+        totalCost -= (obj.qty * obj.price)
+        obj.qty = 1;
+        obj.exists = false;
+    }
+
     // REMOVE BUTTON DELETES ACTUAL TR
     var removeButton = '<button class="removeBtn btn btn-danger">REMOVE</button>';
     $(document).on('click', '.removeBtn', function(){ 
 
-        //remove price from total count
-        var removePrice = $(this).parent().siblings(".price").html();
-        totalCost -= removePrice;
+        // clean object registers, needed for re-adding to cart
+        var objRemoved = ($(this).parent().siblings(".name").html()).toLowerCase(); // used to get the ID of the item
+        console.log("Item being removed: " + objRemoved);
+
+        //switch to clear the right object
+        switch(objRemoved) {
+            case "chair":
+                cleanObj(chair);
+                break;
+            case "table":
+                cleanObj(table);
+                break;
+            case "bed":
+                cleanObj(bed);
+                break;
+            case "bookcase":
+                cleanObj(bookcase);
+                break;
+            case "plant":
+                cleanObj(plant);
+                break;
+            case "tv bench":
+                cleanObj(bed);
+                break;
+            default:
+                console.log("Nothing has been removed! (no match)")
+        }
+
+        // remove price from total count
         updateTotalCost();
 
-        //remove element row
+        // remove element row
         $(this).parent().parent().remove();
     })
-
-
-
 
 });
