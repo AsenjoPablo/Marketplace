@@ -1,129 +1,98 @@
 $(document).ready(function() {
 
-    //set prices for products + html
-    var chairPrice = 15;
-    $("#chair-price").html(chairPrice + "€");
-
-    var tablePrice = 30;
-    $("#table-price").html(tablePrice + "€");
-
-    var bedPrice = 145;
-    $("#bed-price").html(bedPrice + "€");
-    
-    var bookcasePrice = 35;
-    $("#bookcase-price").html(bookcasePrice + "€");
-    
-    var plantPrice = 2;
-    $("#plant-price").html(plantPrice + "€");
-    
-    var tvbenchPrice = 60;
-    $("#tv-bench-price").html(tvbenchPrice + "€");
-
-    //coding buttons
-
-    //checkout
+    // checkout
     var checkoutBtn = $("#checkout-btn");
-
     checkoutBtn.click (function () {
         cart.toggle(200);
     })
 
-    //product buttons
-    var buyChairBtn = $("#buy-chair-btn")
-    var buyTableBtn = $("#buy-table-btn")
-    var buyBedBtn = $("#buy-bed-btn")
-    var buyBookcaseBtn = $("#buy-bookcase-btn")
-    var buyPlantBtn = $("#buy-plant-btn")
-    var buyTVBenchBtn = $("#buy-tv-bench-btn")
-
     // cart
     var cart = $("#cart")
 
-    // ADD TO CART FUNCTIONS
-
-    var counterTable = 0;
-    var chairQty = 0;
-    var tableQty = 0;
-    var bedQty = 0;
-    var bookcaseQty = 0;
-    var plantQty = 0;
-    var tvbenchQty = 0;
-
     // BUY ITEMS LIST
+    var chair = new Item (1, "Chair", 15);
+    var buyChairBtn = $("#buy-chair-btn");
     buyChairBtn.click (function () {
-        totalCost += chairPrice;
-        console.log("added chair");
-        updateTotalCost ();
-
-        //table add functions
-        counterTable++;
-        chairQty++;
-        $("tbody").append('<tr><th scope="row">' + counterTable + '</th> <td>Chair</td><td class="price">'+chairPrice+'</td><td class="qty">' + chairQty + '</td><td>' + removeButton + '</td></tr>');
+        addTest(chair);  
     })
 
+    var table = new Item (2, "Table", 30);
+    var buyTableBtn = $("#buy-table-btn");
     buyTableBtn.click (function () {
-        totalCost += tablePrice;
-        console.log("added table")
-        updateTotalCost ();
-
-        //table add functions
-        counterTable++;
-        tableQty++;
-        $("tbody").append('<tr><th scope="row">' + counterTable + '</th> <td>Table</td><td class="price">'+tablePrice+'</td><td>' + tableQty + '</td><td>' + removeButton + '</td></tr>');
+        addTest(table);  
     })
 
+    var bed = new Item (3, "Bed", 145);
+    var buyBedBtn = $("#buy-bed-btn");
     buyBedBtn.click (function () {
-        totalCost += bedPrice;
-        console.log("added bed")
-        updateTotalCost ();        
-        
-        //table add functions
-        counterTable++;
-        bedQty++;
-        $("tbody").append('<tr><th scope="row">' + counterTable + '</th> <td>Bed</td><td class="price">'+bedPrice+'</td><td>' + bedQty + '</td><td>' + removeButton + '</td></tr>');   
+        addTest(bed);    
     })
 
+    var bookcase = new Item (4, "Bookcase", 35);
+    var buyBookcaseBtn = $("#buy-bookcase-btn");
     buyBookcaseBtn.click (function () {
-        totalCost += bookcasePrice;
-        console.log("added bookcase")
-        updateTotalCost ();
-                
-        //table add functions
-        counterTable++;
-        bookcaseQty++;
-        $("tbody").append('<tr><th scope="row">' + counterTable + '</th> <td>Bookcase</td><td class="price">'+bookcasePrice+'</td><td>' + bookcaseQty + '</td><td>' + removeButton + '</td></tr>');   
+        addTest(bookcase);   
     })
 
+    var plant = new Item (5, "Plant", 2);
+    var buyPlantBtn = $("#buy-plant-btn");
     buyPlantBtn.click (function () {
-        totalCost += plantPrice;
-        console.log("added plant")
-        updateTotalCost ();
-                
-        //table add functions
-        counterTable++;
-        plantQty++;
-        $("tbody").append('<tr><th scope="row">' + counterTable + '</th> <td>Plant</td><td class="price">'+plantPrice+'</td><td>' + plantQty + '</td><td>' + removeButton + '</td></tr>');  
+        addTest(plant);  
     })
 
+    var tvBench = new Item (6, "TV bench", 65);
+    var buyTVBenchBtn = $("#buy-tv-bench-btn");
     buyTVBenchBtn.click (function () {
-        totalCost += tvbenchPrice;
-        console.log("added tv bench")
-        updateTotalCost ();
-                
-        //table add functions
-        counterTable++;
-        tvbenchQty++;
-        $("tbody").append('<tr><th scope="row">' + counterTable + '</th> <td>TV bench</td class="price"><td>'+tvbenchPrice+'</td><td>' + tvbenchQty + '</td><td>' + removeButton + '</td></tr>');  
+        addTest(tvBench);  
     })
+
+    //**********************************EXPERIMENTATION PLAYGROUND**************************************
+    // global builder
+    function Item (id, name, price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.qty = 1;
+        this.price = price;
+        this.exists = false;
+    }
+
+    // TEST PRODUCT DECLARATION
+    var test = new Item ("TEST", "test", 10);
+    $("#test-add").click(function () {
+        addTest(test);  
+    })
+
+    // TODO POSSIBILITY TO CHOOSE QUANTITY BEFORE ADDING TO CART
+    function addTest (testObj) {
+        
+        // if item doesn't exist, it's added as a new row
+        if (!testObj.exists) {
+            $("tbody").append('<tr><th scope="row" id="' + testObj.id + '">' + testObj.id + '</th> <td>' + testObj.name +'</td class="price"><td>'+testObj.price+'</td><td class="qty">' + testObj.qty + '</td><td>' + removeButton + '</td></tr>');  
+            //its existance is changed so the program knows there's already one and stops adding new rows
+            testObj.exists = true;
+        // if the item already exists, we must update its parameters inside the html
+        } else {
+
+            // adds 1 of the item
+            testObj.qty++;
+            console.log("item: " + testObj.name + ", quantity: " + testObj.qty + ", total price of these items: " + testObj.price*testObj.qty)
+
+            //updates shopping cart with new qty
+            $("#" + testObj.id).siblings(".qty").html(testObj.qty);            
+        }
+
+        // cost of individual product is added to total
+        totalCost += testObj.price;
+        updateTotalCost();
+    }
 
     // total cost of products
-
     var totalCost = 0;
-
     function updateTotalCost () {
         $("#total-cost").html("Total cost: " + totalCost + "€");
     }
-    
+
     // REMOVE BUTTON DELETES ACTUAL TR
     var removeButton = '<button class="removeBtn btn btn-danger">REMOVE</button>';
     $(document).on('click', '.removeBtn', function(){ 
@@ -137,26 +106,6 @@ $(document).ready(function() {
         $(this).parent().parent().remove();
     })
 
-
-    //**********************************EXPERIMENTATION PLAYGROUND**************************************
-    // global builder
-    function Item (name, price) {
-        this.name = name;
-        this.price = price;
-        this.qty = 0;
-    }
-
-    //test builder
-    var test = new Item ("test", 10);
-
-    $("#test-add").click(function () {
-        addTest(test);  
-    })
-
-    function addTest (testObj) {
-        $("tbody").append('<tr><th scope="row">' + testObj.id + '</th> <td>' + testObj.name +'</td class="price"><td>'+testObj.price+'</td><td>' + testObj.qty + '</td><td>' + removeButton + '</td></tr>');  
-    }
-    addTest(test)
 
 
 
