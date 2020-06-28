@@ -8,7 +8,13 @@ body {
 
 /* navbar changes */
 .navbar {
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
+
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    lefT: 0px;
+    z-index: 1;
 }
 
 .navbar-nav {
@@ -59,7 +65,7 @@ body {
     top: 20%;
 
     background-color: #f0ad4e;
-    border: dotted 2px #ffd292;
+    border: dotted 3px #ffd292;
     color: white;
 
     padding: 2%;
