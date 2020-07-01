@@ -26,17 +26,39 @@ body {
     width: 50%;
 }
 
-/* align all products and beautify */
+
+/* mobile oriented sizes */
 .products {
     width: 90%;
-    margin: 5%;
-
+    margin: 13%;
+	
     font-size: 1.2rem;
+}
+#cart {
+    padding-top: 15%;
+}
+
+/* smaller empty space when screen is big */
+@media (min-width: 1280px) {
+	.products {
+		margin-top: 5%;
+	}
+	#cart {
+		padding-top: 5%;
+	}
+}
+
+/* product cards */
+@media (max-width: 460px) {
+	.card {
+		padding: 1%;
+   		margin: 10% auto;
+	}
 }
 
 .card {
     padding: 1%;
-    margin: 1% auto;
+    margin: 3% auto;
 }
 
 .card-body {
@@ -66,7 +88,7 @@ body {
 
     background-color: #f0ad4e;
     border: dotted 3px #ffd292;
-    color: white;
+    color: green;
 
     padding: 2%;
     border-radius: 5px;

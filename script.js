@@ -61,20 +61,10 @@ $(document).ready(function() {
 
     })
 
-    // TESTING SLEEP
-    function sleep(milliseconds) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-          if ((new Date().getTime() - start) > milliseconds){
-            break;
-          }
-        }
-      }
-
     // ADDED TO CART CONFIRMATION
     $(".buy-btn").click(function () {
         console.log("click")
-        $(this).parent().append("<div class='confirmation'>Sucessfully added to cart!</div>");
+        $(this).parent().append("<div class='confirmation'>Sucessfully added this item to cart!</div>");
         $(".confirmation").delay(1000).fadeOut(1000);
     })
 
